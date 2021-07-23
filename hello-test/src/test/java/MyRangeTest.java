@@ -92,4 +92,12 @@ public class MyRangeTest {
         assertEquals("2,3,4", result);
     }
 
+    @Test
+    @DisplayName("ข้อมูล [1,5) result: 2,3,4")
+    public void generateNumberStartWithIncludeAndEndWithExclude() {
+        MyRange myRange = new MyRange("[1,5)");
+        String result = myRange.generateNumber();
+        assertEquals("1,2,3,4", result);
+    }
+
 }
