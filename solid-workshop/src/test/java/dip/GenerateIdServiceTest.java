@@ -19,7 +19,37 @@ class MockRandom extends Random {
     }
 }
 
+class SpyRandom extends Random {
+    private boolean called = false;
+    private int counter = 0;
+
+    @Override
+    public int nextInt(int bound) {
+        this.counter++;
+        this.called = true;
+        return 100;
+    }
+    public boolean isCalled() {
+        return called;
+    }
+
+    public int vertify() {
+        return  this.counter;
+    }
+}
+
 class GenerateIdServiceTest {
+
+    @Test
+    public void called_nextInt_of_Random() {
+        GenerateIdService service = new GenerateIdService();
+        SpyRandom spy = new SpyRandom();
+        service.setRandom(spy);
+        service.getId();
+        assertTrue(spy.isCalled());
+        assertEquals(1, spy.vertify());
+    }
+
     @Test
     @DisplayName("generateId")
     public void case01() {
