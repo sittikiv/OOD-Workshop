@@ -3,6 +3,13 @@ package com.example.restapi.number;
 public class DataResponse {
     private String id;
 
+    public DataResponse() {
+    }
+
+    public DataResponse(String id) {
+        this.id = id;
+    }
+
     public String getId() {
         return id;
     }
@@ -11,7 +18,4 @@ public class DataResponse {
         this.id = id;
     }
 
-    public DataResponse(String id) {
-        this.id = id;
-    }
 }
