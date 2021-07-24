@@ -19,20 +19,26 @@ public class TennisGame1 {
 
     public String getScore() {
         String[] scoreResults = new String[]{"Love", "Fifteen", "Thirty", "Forty" };
+        String playerWin = this.player1Name;
+        if (m_score1 < m_score2) playerWin = this.player2Name;
+        int diffScore = Math.abs(m_score1 - m_score2);
+        // All
         if (m_score1 == m_score2 && m_score1 <= 2) {
             return scoreResults[m_score1] + "-All";
         }
-        else if (m_score1 == m_score2 && m_score1 > 2) {
+        // Deuce
+        if (m_score1 == m_score2 && m_score1 > 2) {
             return "Deuce";
         }
-        else if (m_score1 >= 4 || m_score2 >= 4) {
-            String playerWin = this.player1Name;
-            if (m_score1 < m_score2) playerWin = this.player2Name;
-            int minusResult = Math.abs(m_score1 - m_score2);
-            if (minusResult < 2) return "Advantage " + playerWin;
-            else return "Win for " + playerWin;
-        } else {
-            return scoreResults[m_score1] + "-" + scoreResults[m_score2];
+        // Advantage
+        if ((m_score1 >= 4 || m_score2 >= 4) && diffScore < 2) {
+            return "Advantage " + playerWin;
         }
+        // Win
+        if ((m_score1 >= 4 || m_score2 >= 4) && diffScore >= 2) {
+            return "Win for " + playerWin;
+        }
+        // Default
+        return scoreResults[m_score1] + "-" + scoreResults[m_score2];
     }
 }
